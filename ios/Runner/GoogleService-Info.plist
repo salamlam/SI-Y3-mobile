@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBEBNZFONtFspqy0cZzag8Oq2Cb5-MWFVc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>869773068629</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.gpx.usuariosios</string>
+	<key>PROJECT_ID</key>
+	<string>nswox-bc913</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nswox-bc913.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:869773068629:ios:37ec82053364cdf5ec07dc</string>
+</dict>
+</plist>

@@ -1,0 +1,227 @@
+{
+  "project_info": {
+    "project_number": "517851313315",
+    "firebase_url": "https://apptraccar-4b06e-default-rtdb.firebaseio.com",
+    "project_id": "apptraccar-4b06e",
+    "storage_bucket": "apptraccar-4b06e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517851313315:android:199a31c03e9a9ad7147b16",
+        "android_client_info": {
+          "package_name": "com.integraciones.rastreo365"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUWaG70hcYdQfIBY7_75umOF3pe4eQx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517851313315-59g3nrmlvgoq7tv0ishh2q2idie0rkiu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.latamtracker.biogpsios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517851313315:android:ac57ee799aa367aa147b16",
+        "android_client_info": {
+          "package_name": "com.integraciones.spacetrackandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUWaG70hcYdQfIBY7_75umOF3pe4eQx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517851313315-59g3nrmlvgoq7tv0ishh2q2idie0rkiu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.latamtracker.biogpsios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517851313315:android:adab763c55acde67147b16",
+        "android_client_info": {
+          "package_name": "com.latamtracker.BioGPS"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUWaG70hcYdQfIBY7_75umOF3pe4eQx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517851313315-59g3nrmlvgoq7tv0ishh2q2idie0rkiu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.latamtracker.biogpsios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517851313315:android:9400bfe3ef2ef0df147b16",
+        "android_client_info": {
+          "package_name": "com.latamtracker.biogpsplusandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUWaG70hcYdQfIBY7_75umOF3pe4eQx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517851313315-59g3nrmlvgoq7tv0ishh2q2idie0rkiu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.latamtracker.biogpsios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517851313315:android:3ce4c4a7fa545153147b16",
+        "android_client_info": {
+          "package_name": "com.qrogps.appandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUWaG70hcYdQfIBY7_75umOF3pe4eQx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517851313315-59g3nrmlvgoq7tv0ishh2q2idie0rkiu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.latamtracker.biogpsios"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517851313315:android:6a507a75a45d112e147b16",
+        "android_client_info": {
+          "package_name": "com.rastrogps.usuariosandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUWaG70hcYdQfIBY7_75umOF3pe4eQx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517851313315-88jvhras67occtr8mtkhtvfh72l385v8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517851313315-59g3nrmlvgoq7tv0ishh2q2idie0rkiu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.latamtracker.biogpsios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

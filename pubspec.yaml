@@ -1,0 +1,194 @@
+name: gpspro
+description: Gennissi GPS
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+
+  cupertino_icons: 1.0.6
+  http: ^0.13.4
+  intl: ^0.18.1
+  shared_preferences: 2.2.1
+  fluttertoast: 8.2.2
+  webview_flutter: 4.2.2
+  flutter_staggered_grid_view: ^0.4.0
+  firebase_messaging: 14.6.7
+  url_launcher: 6.1.14
+  percent_indicator: ^4.2.2
+  jiffy: 6.2.1
+  permission_handler: 10.4.5
+  flutter_local_notifications: ^17.2.2
+  path_provider: 2.1.1
+  syncfusion_flutter_pdfviewer: 23.1.36
+  sliding_up_panel: ^2.0.0+1
+  font_awesome_flutter: 10.5.0
+  flutter_html: 3.0.0-beta.2
+  badges: 3.1.1
+  flutter_phoenix: 1.1.1
+  google_maps_cluster_manager: ^3.0.0+1
+  flutter_share: ^2.0.0
+  downloads_path_provider_28: ^0.1.2
+  flutter_linkify: ^6.0.0
+  share_plus: 7.0.2
+  blinking_text: ^1.0.2
+  flutter_cache_manager: 3.3.1
+  cached_network_image: ^3.2.3
+  get: 4.6.6
+  timelines: ^0.1.0
+  flutter_vector_icons: ^2.0.0
+  flutter_map: ^5.0.0
+  flutter_map_supercluster: ^4.3.0
+  flutter_svg: ^2.0.7
+  flutter_map_location_marker: ^7.0.5
+  flutter_map_animated_marker:
+    git:
+      url: https://github.com/gennissi/flutter_map_animated_marker.git
+  google_nav_bar: ^5.0.6
+  line_icons: ^2.0.3
+  flutter_expanded_tile: ^0.3.7
+  flutter_map_marker_popup: ^5.2.0
+  syncfusion_flutter_maps: ^23.1.36
+  flutter_launcher_icons: ^0.13.1
+  google_maps_flutter: ^2.5.0
+  google_maps_flutter_ios: ^2.5.0
+  flutter_localization: ^0.1.14
+  curved_navigation_bar: ^1.0.3
+  win32: ^5.5.4
+  community_charts_flutter: ^1.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "images/icon.png"
+
+dependency_overrides:
+  intl: 0.18.1
+  http: 1.1.0
+  flutter_map_tile_caching:
+
+# The following section is specific to Flutter.
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/icons/fence.png
+    - assets/icons/group.png
+    - icons/history.png
+    - assets/icons/text.png
+    - assets/images/
+    - assets/images/apple-store.png
+    - assets/images/arrow-ack.png
+    - assets/images/arrow-ack_ack.png
+    - assets/images/arrow-black.png
+    - assets/images/arrow-blue.png
+    - assets/images/arrow-green.png
+    - assets/images/arrow-offline.png
+    - assets/images/arrow-online.png
+    - assets/images/arrow-orange.png
+    - assets/images/arrow-red.png
+    - assets/images/arrow-yellow.png
+    - assets/images/arrow_left.gif
+    - assets/images/arrow_right.gif
+    - assets/images/bg.png
+    - assets/images/car-old.png
+    - assets/images/car.png
+    - assets/images/cluster.png
+    - assets/images/engine.png
+    - assets/images/google-play.png
+    - assets/images/history-marker.png
+    - assets/images/login-logo.png
+    - assets/images/marker-icon-2x.png
+    - assets/images/marker-icon.png
+    - assets/images/marker-shadow.png
+    - assets/images/no-data-o.png
+    - assets/images/no-data.png
+    - assets/images/no-image.jpg
+    - assets/images/no-streetview-290x125.jpg
+    - assets/images/no-streetview-598x313.jpg
+    - assets/images/no-streetview.jpg
+    - assets/images/red_marker.png
+    - assets/images/report_bars.jpg
+    - assets/images/report_curve.jpg
+    - assets/images/route_drive.png
+    - assets/images/route_end.png
+    - assets/images/route_event.png
+    - assets/images/route_start.png
+    - assets/images/route_stop.png
+    - assets/images/sensors/
+    - assets/images/sensors/Bloqueo.png
+    - assets/images/sensors/Escudo.png
+    - assets/images/sensors/acc.png
+    - assets/images/sensors/battery-level.png
+    - assets/images/sensors/battery-volt.png
+    - assets/images/sensors/battery.png
+    - assets/images/sensors/distance.png
+    - assets/images/sensors/door.png
+    - assets/images/sensors/driver.png
+    - assets/images/sensors/engine-hour.png
+    - assets/images/sensors/engine-off.png
+    - assets/images/sensors/engine-on.png
+    - assets/images/sensors/engine_hours.png
+    - assets/images/sensors/fuel-consumption.png
+    - assets/images/sensors/fuel-level.png
+    - assets/images/sensors/fuel_tank.png
+    - assets/images/sensors/fuel_tank_calibration.png
+    - assets/images/sensors/gsm.png
+    - assets/images/sensors/harsh-acceleration.png
+    - assets/images/sensors/harsh-breaking.png
+    - assets/images/sensors/ignition.png
+    - assets/images/sensors/logical.png
+    - assets/images/sensors/main.png
+    - assets/images/sensors/numerical.png
+    - assets/images/sensors/odometer.png
+    - assets/images/sensors/sat.png
+    - assets/images/sensors/sat2.png
+    - assets/images/sensors/satellite.png
+    - assets/images/sensors/satellites.png
+    - assets/images/sensors/seatbelt.png
+    - assets/images/sensors/speed.png
+    - assets/images/sensors/temperature.png
+    - assets/images/sensors/textual.png
+    - assets/images/sensors/tier.png
+    - assets/images/sensors/total-distance.png
+    - assets/images/speedometer.png
+    - assets/images/steering.png
+    - assets/images/tracker-id.jpg
+    - assets/images/tracker-imei.jpg
+    - assets/images/zoom_in.png
+    - assets/images/zoom_out.png
+    - icons/
+    - images/
+    - images/arrow.png
+    - images/device_icons/
+    - images/device_icons/rotating/
+    - images/device_icons/v2/
+
+  fonts:
+    - family: Poppins-Bold
+      fonts:
+        - asset: fonts/Poppins-Bold.ttf
+    - family: Poppins-Light
+      fonts:
+        - asset: fonts/Poppins-Light.ttf
+    - family: Poppins-Medium
+      fonts:
+        - asset: fonts/Poppins-Medium.ttf
+    - family: Poppins-Regular
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+    - family: Poppins-SemiBold
+      fonts:
+        - asset: fonts/Poppins-SemiBold.ttf
