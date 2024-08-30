@@ -28,7 +28,7 @@ dependencies:
   jiffy: 6.2.1
   permission_handler: 10.4.5
   flutter_local_notifications: ^17.2.2
-  path_provider: 2.1.1
+  path_provider: ^2.1.4
   syncfusion_flutter_pdfviewer: 23.1.36
   sliding_up_panel: ^2.0.0+1
   font_awesome_flutter: 10.5.0
@@ -37,7 +37,6 @@ dependencies:
   flutter_phoenix: 1.1.1
   google_maps_cluster_manager: ^3.0.0+1
   flutter_share: ^2.0.0
-  downloads_path_provider_28: ^0.1.2
   flutter_linkify: ^6.0.0
   share_plus: 7.0.2
   blinking_text: ^1.0.2
@@ -63,7 +62,7 @@ dependencies:
   google_maps_flutter_ios: ^2.5.0
   flutter_localization: ^0.1.14
   curved_navigation_bar: ^1.0.3
-  win32: ^5.5.4
+  #win32: ^5.5.4
   community_charts_flutter: ^1.0.4
 
 dev_dependencies:

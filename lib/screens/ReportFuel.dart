@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,10 +30,10 @@ class _ReportFuelPageState extends State<ReportFuelPage> {
   File? file;
   late WebViewController _controller;
 
-
   var bytes;
   Color _mapTypeBackgroundColor = CustomColor.primaryColor;
   Color _mapTypeForegroundColor = CustomColor.secondaryColor;
+
   @override
   void initState() {
     _postsController = new StreamController();
@@ -51,7 +50,6 @@ class _ReportFuelPageState extends State<ReportFuelPage> {
 
     final WebViewController controller =
     WebViewController.fromPlatformCreationParams(params);
-    // #enddocregion platform_features
 
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -91,20 +89,17 @@ Page resource error:
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message.message)),
           );
-        });
+        },
+      );
 
-    // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
       (controller.platform as AndroidWebViewController)
           .setMediaPlaybackRequiresUserGesture(false);
     }
-    // #enddocregion platform_features
 
     _controller = controller;
-    setState(() {
-
-    });
+    setState(() {});
     getReport();
     super.initState();
   }
@@ -117,7 +112,6 @@ Page resource error:
     bytes = await consolidateHttpClientResponseBytes(response);
     String dir = (await getApplicationDocumentsDirectory()).path;
     File pdffile = new File('$dir/$filename-$randomNumber.html');
-    //Navigator.pop(context); // Load from assets
     file = pdffile;
     await file!.writeAsBytes(bytes);
     _loadHtmlFromAssets();
@@ -129,43 +123,61 @@ Page resource error:
       if (args != null) {
         timer.cancel();
         APIService.getReportHtml(
-                args!.id.toString(), args!.fromDate, args!.toDate, args!.type)
+            args!.id.toString(), args!.fromDate, args!.toDate, args!.type)
             .then((value) => {
-              _downloadFile(value!.url!, "work"),
+          _downloadFile(value!.url!, "work"),
           setState(() {
-            isLoading = false;})
-            });
+            isLoading = false;
+          })
+        });
       }
     });
   }
 
   Future<File?> writeFile() async {
-    // storage permission ask
-    Random random = new Random();
-    int randomNumber = random.nextInt(100);
     var status = await Permission.storage.status;
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    // the downloads folder path
-    var tempDir = await DownloadsPathProvider.downloadsDirectory;
-    String tempPath = tempDir!.path;
-    File pdffile = new File('$tempPath/work-$randomNumber.pdf');
-    file = pdffile;
-    await file!.writeAsBytes(bytes);
+
+    Directory? directory;
+    if (Platform.isAndroid) {
+      directory = await getExternalStorageDirectory();
+    } else {
+      directory = await getApplicationDocumentsDirectory();
+    }
+
+    if (directory == null) {
+      Fluttertoast.showToast(
+          msg: "No se pudo acceder al directorio de descargas",
+          backgroundColor: Colors.red,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      return null;
+    }
+
+    Random random = new Random();
+    int randomNumber = random.nextInt(100);
+    String filePath = '${directory.path}/work-$randomNumber.pdf';
+    File pdfFile = File(filePath);
+    await pdfFile.writeAsBytes(bytes);
 
     Fluttertoast.showToast(
-        msg: "Archivo exportado a la carpeta de descargas",
+        msg: "Archivo exportado a ${pdfFile.path}",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16.0
+    );
 
-    return file;
+    return pdfFile;
   }
-
 
   _loadHtmlFromAssets() async {
     setState(() {
@@ -173,11 +185,11 @@ Page resource error:
       _postsController!.add(1);
     });
     String fileHtmlContents = await file!.readAsString();
-    _controller.loadHtmlString(Uri.dataFromString(fileHtmlContents,
-        mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-        .toString());
-
-
+    _controller.loadHtmlString(Uri.dataFromString(
+        fileHtmlContents,
+        mimeType: 'text/html',
+        encoding: Encoding.getByName('utf-8')
+    ).toString());
   }
 
   @override
@@ -192,42 +204,44 @@ Page resource error:
     args = ModalRoute.of(context)!.settings.arguments as ReportArguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(args!.name,
-              style: TextStyle(color: CustomColor.secondaryColor)),
-          iconTheme: IconThemeData(
-            color: CustomColor.secondaryColor, //change your color here
-          ),
+      appBar: AppBar(
+        title: Text(args!.name,
+            style: TextStyle(color: CustomColor.secondaryColor)),
+        iconTheme: IconThemeData(
+          color: CustomColor.secondaryColor,
         ),
-        floatingActionButton:   !isLoading ? FloatingActionButton(
-          heroTag: "mapType",
-          mini: true,
-          onPressed: writeFile,
-          materialTapTargetSize: MaterialTapTargetSize.padded,
-          backgroundColor: _mapTypeBackgroundColor,
-          foregroundColor: _mapTypeForegroundColor,
-          child: const Icon(Icons.download_rounded, size: 30.0),
-        ) : Container(),
-        body: StreamBuilder<int>(
-            stream: _postsController!.stream,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-              if (snapshot.data == 1) {
-               return WebViewWidget(
-                 controller: _controller
-                );
-              } else if (isLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.data == 0) {
-                return Center(
-                  child: Text(('noData')),
-                );
-              } else {
-                return Center(
-                  child: Text(('noData')),
-                );
-              }
-            }));;
+      ),
+      floatingActionButton: !isLoading
+          ? FloatingActionButton(
+        heroTag: "mapType",
+        mini: true,
+        onPressed: writeFile,
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+        backgroundColor: _mapTypeBackgroundColor,
+        foregroundColor: _mapTypeForegroundColor,
+        child: const Icon(Icons.download_rounded, size: 30.0),
+      )
+          : Container(),
+      body: StreamBuilder<int>(
+        stream: _postsController!.stream,
+        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+          if (snapshot.data == 1) {
+            return WebViewWidget(controller: _controller);
+          } else if (isLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.data == 0) {
+            return Center(
+              child: Text(('noData')),
+            );
+          } else {
+            return Center(
+              child: Text(('noData')),
+            );
+          }
+        },
+      ),
+    );
   }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,6 +29,7 @@ class _ReportSummaryPageState extends State<ReportSummaryPage> {
   var bytes;
   Color _mapTypeBackgroundColor = CustomColor.primaryColor;
   Color _mapTypeForegroundColor = CustomColor.secondaryColor;
+
   @override
   void initState() {
     _postsController = new StreamController();
@@ -46,7 +46,6 @@ class _ReportSummaryPageState extends State<ReportSummaryPage> {
     String dir = (await getApplicationDocumentsDirectory()).path;
     print(dir);
     File pdffile = new File('$dir/$filename-$randomNumber.pdf');
-    //Navigator.pop(context); // Load from assets
     file = pdffile;
     _postsController!.add(1);
     setState(() {
@@ -57,30 +56,48 @@ class _ReportSummaryPageState extends State<ReportSummaryPage> {
   }
 
   Future<File?> writeFile() async {
-    // storage permission ask
-    Random random = new Random();
-    int randomNumber = random.nextInt(100);
     var status = await Permission.storage.status;
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    // the downloads folder path
-    Directory? tempDir = await DownloadsPathProvider.downloadsDirectory;
-    String tempPath = tempDir!.path;
-    File pdffile = new File('$tempPath/summary-$randomNumber.pdf');
-    file = pdffile;
-    await file!.writeAsBytes(bytes);
+
+    Directory? directory;
+    if (Platform.isAndroid) {
+      directory = await getExternalStorageDirectory();
+    } else {
+      directory = await getApplicationDocumentsDirectory();
+    }
+
+    if (directory == null) {
+      Fluttertoast.showToast(
+          msg: "No se pudo acceder al directorio de descargas",
+          backgroundColor: Colors.red,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      return null;
+    }
+
+    Random random = new Random();
+    int randomNumber = random.nextInt(100);
+    String filePath = '${directory.path}/summary-$randomNumber.pdf';
+    File pdfFile = File(filePath);
+    await pdfFile.writeAsBytes(bytes);
 
     Fluttertoast.showToast(
-        msg: "Archivo exportado a la carpeta de descargas",
+        msg: "Archivo exportado a ${pdfFile.path}",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16.0
+    );
 
-    return file;
+    return pdfFile;
   }
 
   getReport() {
@@ -88,11 +105,11 @@ class _ReportSummaryPageState extends State<ReportSummaryPage> {
       if (args != null) {
         timer.cancel();
         APIService.getReport(args!).then((value) => {
-              _downloadFile(value!.url!, "summary"),
-              setState(() {
-                isLoading = false;
-              })
-            });
+          _downloadFile(value!.url!, "summary"),
+          setState(() {
+            isLoading = false;
+          })
+        });
       }
     });
   }
@@ -105,19 +122,19 @@ class _ReportSummaryPageState extends State<ReportSummaryPage> {
         appBar: AppBar(
           title: Text(args!.name, style: TextStyle(color: CustomColor.secondaryColor)),
           iconTheme: IconThemeData(
-            color: CustomColor.secondaryColor, //change your color here
+            color: CustomColor.secondaryColor,
           ),
         ),
         floatingActionButton: !isLoading
             ? FloatingActionButton(
-                heroTag: "mapType",
-                mini: true,
-                onPressed: writeFile,
-                materialTapTargetSize: MaterialTapTargetSize.padded,
-                backgroundColor: _mapTypeBackgroundColor,
-                foregroundColor: _mapTypeForegroundColor,
-                child: const Icon(Icons.download_rounded, size: 30.0),
-              )
+          heroTag: "mapType",
+          mini: true,
+          onPressed: writeFile,
+          materialTapTargetSize: MaterialTapTargetSize.padded,
+          backgroundColor: _mapTypeBackgroundColor,
+          foregroundColor: _mapTypeForegroundColor,
+          child: const Icon(Icons.download_rounded, size: 30.0),
+        )
             : Container(),
         body: StreamBuilder<int>(
             stream: _postsController!.stream,
@@ -136,6 +153,8 @@ class _ReportSummaryPageState extends State<ReportSummaryPage> {
                   child: Text(('noData')),
                 );
               }
-            }));
+            }
+        )
+    );
   }
 }

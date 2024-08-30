@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,6 +29,7 @@ class _ReportStopPageState extends State<ReportStopPage> {
 
   Color _mapTypeBackgroundColor = CustomColor.primaryColor;
   Color _mapTypeForegroundColor = CustomColor.secondaryColor;
+
   @override
   void initState() {
     _postsController = new StreamController();
@@ -46,14 +46,13 @@ class _ReportStopPageState extends State<ReportStopPage> {
     bytes = await consolidateHttpClientResponseBytes(response);
     String dir = (await getApplicationDocumentsDirectory()).path;
     File pdffile = new File('$dir/$filename-$randomNumber.pdf');
-    //Navigator.pop(context); // Load from assets
     file = pdffile;
     _postsController!.add(1);
     setState(() {
-      isLoading = false;});
+      isLoading = false;
+    });
     await file!.writeAsBytes(bytes);
     return file;
-      return null;
   }
 
   getReport() {
@@ -61,42 +60,58 @@ class _ReportStopPageState extends State<ReportStopPage> {
       if (args != null) {
         timer.cancel();
         APIService.getReportStop(
-                args!.id.toString(), args!.fromDate, args!.toDate, args!.type)
+            args!.id.toString(), args!.fromDate, args!.toDate, args!.type)
             .then((value) => {
-              _downloadFile(value!.url!, "stop"),
-            });
+          _downloadFile(value!.url!, "stop"),
+        });
       }
     });
   }
 
-
   Future<File?> writeFile() async {
-    // storage permission ask
-    Random random = new Random();
-    int randomNumber = random.nextInt(100);
     var status = await Permission.storage.status;
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    // the downloads folder path
-    Directory? tempDir = await DownloadsPathProvider.downloadsDirectory;
-    String tempPath = tempDir!.path;
-    File pdffile = new File('$tempPath/stop-$randomNumber.pdf');
-    file = pdffile;
-    await file!.writeAsBytes(bytes);
+
+    Directory? directory;
+    if (Platform.isAndroid) {
+      directory = await getExternalStorageDirectory();
+    } else {
+      directory = await getApplicationDocumentsDirectory();
+    }
+
+    if (directory == null) {
+      Fluttertoast.showToast(
+          msg: "No se pudo acceder al directorio de descargas",
+          backgroundColor: Colors.red,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      return null;
+    }
+
+    Random random = new Random();
+    int randomNumber = random.nextInt(100);
+    String filePath = '${directory.path}/stop-$randomNumber.pdf';
+    File pdfFile = File(filePath);
+    await pdfFile.writeAsBytes(bytes);
 
     Fluttertoast.showToast(
-        msg: "Archivo exportado a la carpeta de descargas",
+        msg: "Archivo exportado a ${pdfFile.path}",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16.0
+    );
 
-    return file;
+    return pdfFile;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -107,10 +122,11 @@ class _ReportStopPageState extends State<ReportStopPage> {
           title: Text(args!.name,
               style: TextStyle(color: CustomColor.secondaryColor)),
           iconTheme: IconThemeData(
-            color: CustomColor.secondaryColor, //change your color here
+            color: CustomColor.secondaryColor,
           ),
         ),
-        floatingActionButton:    !isLoading ? FloatingActionButton(
+        floatingActionButton: !isLoading
+            ? FloatingActionButton(
           heroTag: "mapType",
           mini: true,
           onPressed: writeFile,
@@ -118,7 +134,8 @@ class _ReportStopPageState extends State<ReportStopPage> {
           backgroundColor: _mapTypeBackgroundColor,
           foregroundColor: _mapTypeForegroundColor,
           child: const Icon(Icons.download_rounded, size: 30.0),
-        ): Container(),
+        )
+            : Container(),
         body: StreamBuilder<int>(
             stream: _postsController!.stream,
             builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
@@ -140,6 +157,8 @@ class _ReportStopPageState extends State<ReportStopPage> {
                   child: Text(('noData')),
                 );
               }
-            }));
+            }
+        )
+    );
   }
 }
