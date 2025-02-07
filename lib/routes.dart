@@ -12,7 +12,7 @@ import 'package:gpspro/screens/Home.dart';
 import 'package:gpspro/screens/Login.dart';
 import 'package:gpspro/screens/NotificationMap.dart';
 import 'package:gpspro/screens/Notifications.dart';
-import 'package:gpspro/screens/Playback.dart';
+// import 'package:gpspro/screens/Playback.dart';
 import 'package:gpspro/screens/ReportFuel.dart';
 import 'package:gpspro/screens/ReportRoute.dart';
 import 'package:gpspro/screens/ReportStopView.dart';
@@ -45,7 +45,7 @@ final Map<String, WidgetBuilder> routes = {
   '/reportStop': (context) => ReportStopPage(),
   '/reportSummary': (context) => ReportSummaryPage(),
   '/reportSummaryView': (context) => ReportSummaryViewPage(),
-  '/playback': (context) => PlaybackPage(),
+  // '/playback': (context) => PlaybackPage(),
   '/historyRoute': (context) => HistoryMarkerPage(),
   '/notificationType': (context) => NotificationTypePage(),
   '/eventMap': (context) => EventMapPage(),
